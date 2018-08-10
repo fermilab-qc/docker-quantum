@@ -21,18 +21,6 @@ RUN git clone https://github.com/holzman/Quantum.git
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 RUN cd Quantum; code .; cd Samples/Teleportation; dotnet build
 
-RUN source /home/user/miniconda3/bin/activate && conda install 'python==3.6.4'
-RUN source /home/user/miniconda3/bin/activate && pip install git+https://github.com/pythonnet/pythonnet
-RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linux
-RUN source /home/user/miniconda3/bin/activate && conda env create -f /home/user/Quantum/Samples/PythonInterop/environment.yml
-
-RUN source /home/user/miniconda3/bin/activate && conda install nb_conda
-RUN source /home/user/miniconda3/bin/activate qsharp-samples && conda install ipykernel
-RUN cd Quantum/Samples/PythonInterop && dotnet build && dotnet publish
-
-RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linux # 3a5e2b21d6
-
-ENV LD_LIBRARY_PATH=/home/user/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
 
 ###
 
@@ -50,5 +38,20 @@ RUN source /home/user/miniconda3/bin/activate && pip install qiskit
 # ProjectQ
 RUN source /home/user/miniconda3/bin/activate && pip install pybind11
 RUN source /home/user/miniconda3/bin/activate && LC_ALL=en_US.UTF-8 pip install projectq
+
+RUN source /home/user/miniconda3/bin/activate && conda install 'python==3.6.4'
+RUN source /home/user/miniconda3/bin/activate && pip install git+https://github.com/holzman/pythonnet
+#RUN source /home/user/miniconda3/bin/activate && pip install git+https://github.com/pythonnet/pythonnet
+RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linux # bh
+RUN source /home/user/miniconda3/bin/activate && conda env create -f /home/user/Quantum/Samples/PythonInterop/environment.yml
+
+RUN source /home/user/miniconda3/bin/activate && conda install nb_conda
+RUN source /home/user/miniconda3/bin/activate qsharp-samples && conda install ipykernel
+RUN cd Quantum/Samples/PythonInterop && dotnet build && dotnet publish
+
+RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linux # 3a5e2b21d6
+
+ENV LD_LIBRARY_PATH=/home/user/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
+
 
 CMD source /home/user/miniconda3/bin/activate && jupyter notebook --no-browser --port=${JUPYTER_PORT:-8888}
