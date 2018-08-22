@@ -53,9 +53,13 @@ RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linu
 
 RUN source /home/user/miniconda3/bin/activate && conda config --add channels http://conda.anaconda.org/psi4 && conda install psi4
 RUN source /home/user/miniconda3/bin/activate && git clone https://github.com/quantumlib/OpenFermion-Psi4 && cd OpenFermion-Psi4 && pip install -e .
-RUN source /home/user/miniconda3/bin/activate && pip install openfermioncirq
-
+RUN source /home/user/miniconda3/bin/activate && LC_ALL=en_US.UTF-8 pip install openfermioncirq openfermionpyscf
 RUN source /home/user/miniconda3/bin/activate && conda install -c conda-forge jupyterlab
+
+
+RUN git clone https://github.com/quantumlib/OpenFermion && git clone https://github.com/quantumlib/OpenFermion-PySCF
+
+
 
 ENV LD_LIBRARY_PATH=/home/user/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
 
