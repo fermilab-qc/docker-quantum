@@ -54,4 +54,4 @@ RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linu
 ENV LD_LIBRARY_PATH=/home/user/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
 
 
-CMD source /home/user/miniconda3/bin/activate && jupyter notebook --no-browser --port=${JUPYTER_PORT:-8888}
+CMD source /home/user/miniconda3/bin/activate && jupyter notebook --no-browser --ip=`tail -1 /etc/hosts | awk '{print $1}'` --port=${JUPYTER_PORT:-8888}
