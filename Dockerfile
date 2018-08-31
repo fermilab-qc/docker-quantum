@@ -12,8 +12,8 @@ RUN dnf -y install mono-core mono-devel mono-winfxcore libmono-2_0-devel
 RUN dnf -y install dotnet-sdk-2.1 code 
 RUN dnf -y install clang
 
-USER user
-WORKDIR /home/user
+USER $NB_USER
+WORKDIR /home/$NB_USER
 
 RUN git clone https://github.com/holzman/Quantum.git
 RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linux
