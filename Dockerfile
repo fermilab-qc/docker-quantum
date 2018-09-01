@@ -8,19 +8,17 @@ RUN echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft
 RUN rpm -Uvh https://packages.microsoft.com/config/rhel/7/packages-microsoft-prod.rpm
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
 
-RUN dnf -y install mono-core mono-devel mono-winfxcore libmono-2_0-devel
-RUN dnf -y install dotnet-sdk-2.1 code 
-RUN dnf -y install clang
-RUN dnf -y install bzip2 tar which git libgomp
+RUN dnf -y install mono-core mono-devel mono-winfxcore libmono-2_0-devel dotnet-sdk-2.1 code clang bzip2 tar which git libgomp
+RUN mkdir -p /srv/git && chown $NB_UID:$NB_GID /srv/git
 
+ENV GITDIR=/srv/git
 USER $NB_USER
-WORKDIR /home/$NB_USER
+WORKDIR $GITDIR
+
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 RUN git clone https://github.com/holzman/Quantum.git
-RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linux
-ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
-RUN cd Quantum; code .; cd Samples/Teleportation; dotnet build
-
+RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linux && code . && cd Samples/Teleportation && dotnet build
 
 ###
 
@@ -34,11 +32,11 @@ RUN pip install qiskit
 RUN pip install pybind11
 RUN LC_ALL=en_US.UTF-8 pip install projectq
 
-RUN conda install 'python==3.6.4'
+RUN conda install 'python==3.6.4' && conda clean -tipsy
 RUN pip install git+https://github.com/holzman/pythonnet
-RUN conda env create -f /home/${NB_USER}/Quantum/Samples/PythonInterop/environment.yml
+RUN conda env create -f $GITDIR/Quantum/Samples/PythonInterop/environment.yml
 
-RUN conda install nb_conda
+RUN conda install nb_conda && conda clean -tipsy
 
 USER root
 RUN source activate qsharp-samples && conda install ipykernel
@@ -47,13 +45,13 @@ USER $NB_USER
 RUN cd Quantum/Samples/PythonInterop && dotnet build && dotnet publish
 
 USER root
-RUN conda config --add channels http://conda.anaconda.org/psi4 && conda install psi4
+RUN conda config --add channels http://conda.anaconda.org/psi4 && conda install psi4 && conda clean -tipsy
 RUN LC_ALL=en_US.UTF-8 pip install openfermioncirq openfermionpyscf openfermionpsi4
-RUN conda install -c conda-forge jupyterlab
+#RUN conda install -c conda-forge jupyterlab && conda clean -tipsy
 
 USER $NB_USER
 RUN git clone https://github.com/quantumlib/OpenFermion && git clone https://github.com/quantumlib/OpenFermion-PySCF && git clone https://github.com/quantumlib/OpenFermion-Psi4
 
-ENV LD_LIBRARY_PATH=/home/${NB_USER}/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
+ENV LD_LIBRARY_PATH=$GITDIR/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
 
 USER $NB_USER
