@@ -53,5 +53,7 @@ USER $NB_USER
 RUN git clone https://github.com/quantumlib/OpenFermion && git clone https://github.com/quantumlib/OpenFermion-PySCF && git clone https://github.com/quantumlib/OpenFermion-Psi4
 
 ENV LD_LIBRARY_PATH=$GITDIR/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
+ENV PYTHONPATH=$PYTHONPATH:$GITDIR/Quantum/Interoperability/python
+RUN ln -s /home/jovyan/work $GITDIR/work
 
 USER $NB_USER
