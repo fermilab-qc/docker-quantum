@@ -34,7 +34,7 @@ RUN LC_ALL=en_US.UTF-8 pip install projectq
 
 RUN conda install 'python==3.6.4' && conda clean -tipsy
 RUN pip install git+https://github.com/holzman/pythonnet
-RUN conda env create -f $GITDIR/Quantum/Samples/PythonInterop/environment.yml
+RUN conda env create -f $GITDIR/Quantum/Samples/PythonInterop/environment.yml && conda clean -tipsy
 
 RUN conda install nb_conda && conda clean -tipsy
 
