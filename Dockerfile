@@ -47,6 +47,10 @@ RUN cd Quantum/Samples/PythonInterop && dotnet build && dotnet publish
 USER root
 RUN conda config --add channels http://conda.anaconda.org/psi4 && conda install psi4 && conda clean -tipsy
 RUN LC_ALL=en_US.UTF-8 pip install openfermioncirq openfermionpyscf openfermionpsi4
+
+# hackery - users need write access to openfermion (!)
+RUN chown -R $NB_UID:$NB_GID $CONDA_DIR/lib/python3.6/site-packages/openfermion*
+
 #RUN conda install -c conda-forge jupyterlab && conda clean -tipsy
 
 USER $NB_USER
