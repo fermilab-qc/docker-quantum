@@ -46,7 +46,7 @@ RUN cd Quantum/Samples/PythonInterop && dotnet build && dotnet publish
 
 USER root
 RUN conda config --add channels http://conda.anaconda.org/psi4 && conda install psi4 && conda clean -tipsy
-RUN LC_ALL=en_US.UTF-8 pip install git+https://github.com/quantumlib/OpenFermion git+https://github.com/quantumlib/OpenFermion-Cirq git+https://github.com/quantumlib/OpenFermion-Pyscf git+https://github.com/quantumlib/OpenFermion-Psi4
+RUN LC_ALL=en_US.UTF-8 pip install git+https://github.com/quantumlib/OpenFermion git+https://github.com/quantumlib/OpenFermion-Cirq openfermionpyscf git+https://github.com/quantumlib/OpenFermion-Psi4
 
 # hackery - users need write access to openfermion (!)
 RUN chown -R $NB_UID:$NB_GID $CONDA_DIR/lib/python3.6/site-packages/openfermion*
