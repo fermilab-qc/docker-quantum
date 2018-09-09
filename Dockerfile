@@ -51,6 +51,12 @@ RUN LC_ALL=en_US.UTF-8 pip install git+https://github.com/quantumlib/OpenFermion
 # hackery - users need write access to openfermion (!)
 RUN chown -R $NB_UID:$NB_GID $CONDA_DIR/lib/python3.6/site-packages/openfermion*
 
+# update to bleeding edge cirq
+RUN pip install --upgrade git+https://github.com/quantumlib/cirq
+
+# Add qutip to conda base environment
+RUN conda install qutip && conda clean -tipsy
+
 USER $NB_USER
 RUN git clone https://github.com/quantumlib/OpenFermion && git clone https://github.com/quantumlib/OpenFermion-PySCF && git clone https://github.com/quantumlib/OpenFermion-Psi4
 
