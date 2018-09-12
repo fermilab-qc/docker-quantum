@@ -58,7 +58,7 @@ RUN pip install --upgrade git+https://github.com/quantumlib/cirq
 RUN conda install qutip && conda clean -tipsy
 
 USER $NB_USER
-RUN git clone https://github.com/quantumlib/OpenFermion && git clone https://github.com/quantumlib/OpenFermion-PySCF && git clone https://github.com/quantumlib/OpenFermion-Psi4 && git clone https://github.com/kevinsung/OpenFermion-Cirq
+RUN git clone https://github.com/quantumlib/OpenFermion && git clone https://github.com/quantumlib/OpenFermion-PySCF && git clone https://github.com/quantumlib/OpenFermion-Psi4 && git clone  https://github.com/kevinsung/OpenFermion-Hands-On-Tutorials
 
 ENV LD_LIBRARY_PATH=$GITDIR/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
 ENV PYTHONPATH=$PYTHONPATH:$GITDIR/Quantum/Interoperability/python
