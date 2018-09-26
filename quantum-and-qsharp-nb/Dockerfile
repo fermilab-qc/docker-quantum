@@ -1,4 +1,4 @@
-FROM docker.io/holzman/cirq-notebook
+FROM docker.io/holzman/quantum-nb
 
 USER root
 RUN rpm --import "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" && curl https://download.mono-project.com/repo/centos7-stable.repo > /etc/yum.repos.d/mono-centos7-stable.repo
@@ -14,13 +14,45 @@ WORKDIR $GITDIR
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 RUN git clone https://github.com/holzman/Quantum.git
-RUN cd Quantum && git fetch origin && git checkout linux && git pull origin linux && code . && cd Samples/Teleportation && dotnet build
+
+USER root
+RUN dnf -y install libX11-xcb compat-openssl10-devel
+
+USER $NB_USER
+RUN cd Quantum && git checkout linux  && code . && cd Samples/Teleportation && dotnet build
 
 RUN conda install 'python==3.6.4' && conda clean -tipsy
+
+USER root
+RUN dnf -y install glib2-devel
+USER $NB_USER
 RUN source activate && pip install git+https://github.com/holzman/pythonnet
 
 RUN conda env create -f $GITDIR/Quantum/Samples/PythonInterop/environment.yml && conda clean -tipsy
 RUN source activate qsharp-samples && conda install ipykernel
+RUN cd Quantum/Samples/PythonInterop && dotnet build && dotnet publish
+
 
 ENV LD_LIBRARY_PATH=$GITDIR/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
 ENV PYTHONPATH=$PYTHONPATH:$GITDIR/Quantum/Interoperability/python
+
+####
+
+FROM docker.io/holzman/base-notebook
+USER root
+
+ENV GITDIR /srv/git
+RUN dnf -y install glibc-devel libgomp
+
+COPY --from=0 $CONDA_DIR $CONDA_DIR
+COPY --from=0 $GITDIR $GITDIR
+COPY --from=0 /usr/lib64/libmonosgen-2.0.so.1.0.0 /usr/lib64/libmonosgen-2.0.so.1.0.0
+COPY --from=0 /usr/lib/mono /usr/lib/mono
+
+RUN ldconfig && chown -R $NB_UID:$NB_GID $GITDIR
+
+USER $NB_USER
+
+ENV PYTHONPATH $GITDIR/Quantum/Interoperability/python
+ENV LD_LIBRARY_PATH $GITDIR/Quantum/Samples/PythonInterop/bin/Debug/netstandard2.0/publish/runtimes/linux-x64/native/
+WORKDIR $GITDIR
