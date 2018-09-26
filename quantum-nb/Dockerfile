@@ -56,7 +56,7 @@ USER $NB_USER
 RUN conda config --add channels http://conda.anaconda.org/psi4 && conda install psi4=1.2.1+406f4de && conda clean -tipsy
 
 RUN source activate && LC_ALL=en_US.UTF-8 pip install \
-	openfermion==0.8.1 cirq==0.3.1.35 openfermionpyscf==0.3 openfermionpsi4==0.4
+	openfermion==0.8.1 cirq==0.3.1.35 openfermionpyscf==0.3 openfermionpsi4==0.4 openfermioncirc==0.2.1a
 
 # hackery - users need write access to openfermion (!)
 #RUN chown -R $NB_UID:$NB_GID $CONDA_DIR/lib/python3.6/site-packages/openfermion*
