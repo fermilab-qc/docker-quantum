@@ -44,7 +44,12 @@ USER root
 ENV GITDIR /srv/git
 RUN dnf -y install glibc-devel libgomp
 
+
 COPY --from=0 $CONDA_DIR $CONDA_DIR
+
+# hackery - users need write access to openfermion/data (!)
+RUN chown -R $NB_UID:$NB_GID $CONDA_DIR/lib/python3.6/site-packages/openfermion/data
+
 COPY --from=0 $GITDIR $GITDIR
 COPY --from=0 /usr/lib64/libmonosgen-2.0.so.1.0.0 /usr/lib64/libmonosgen-2.0.so.1.0.0
 COPY --from=0 /usr/lib/mono /usr/lib/mono
