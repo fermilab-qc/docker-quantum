@@ -1,4 +1,4 @@
-FROM docker.io/holzman/cirq-notebook
+FROM docker.io/holzman/quantum-lite
 
 USER root
 RUN dnf -y install gcc gcc-c++

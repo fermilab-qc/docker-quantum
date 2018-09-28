@@ -1,17 +1,17 @@
-.PHONY: base-notebook cirq-notebook quantum-nb quantum-and-qsharp-nb
+.PHONY: base-notebook quantum-lite quantum-full quantum-full-and-qsharp
 
-all: base-notebook cirq-notebook quantum-nb quantum-and-qsharp-nb
+all: base-notebook quantum-lite quantum-full quantum-full-and-qsharp
 
 base-notebook: base-notebook/Dockerfile
 	docker build -t docker.io/holzman/base-notebook base-notebook
 
-cirq-notebook: base-notebook/Dockerfile cirq-notebook/Dockerfile
-	docker build -t docker.io/holzman/cirq-notebook cirq-notebook
+quantum-lite: base-notebook/Dockerfile quantum-lite/Dockerfile
+	docker build -t docker.io/holzman/quantum-lite quantum-lite
 
-quantum-nb: base-notebook/Dockerfile cirq-notebook/Dockerfile quantum-nb/Dockerfile
-	docker build -t docker.io/holzman/quantum-nb quantum-nb
+quantum-full: base-notebook/Dockerfile quantum-lite/Dockerfile quantum-full/Dockerfile
+	docker build -t docker.io/holzman/quantum-full quantum-full
 
-quantum-and-qsharp-nb: base-notebook/Dockerfile cirq-notebook/Dockerfile quantum-nb/Dockerfile quantum-and-qsharp-nb/Dockerfile
-	docker build -t docker.io/holzman/quantum-and-qsharp-nb quantum-and-qsharp-nb
+quantum-full-and-qsharp: base-notebook/Dockerfile quantum-lite/Dockerfile quantum-full/Dockerfile quantum-full-and-qsharp/Dockerfile
+	docker build -t docker.io/holzman/quantum-full-and-qsharp quantum-full-and-qsharp
 
 

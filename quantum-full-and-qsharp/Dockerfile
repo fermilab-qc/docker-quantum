@@ -1,4 +1,4 @@
-FROM docker.io/holzman/quantum-nb
+FROM docker.io/holzman/quantum-full
 
 USER root
 RUN rpm --import "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" && curl https://download.mono-project.com/repo/centos7-stable.repo > /etc/yum.repos.d/mono-centos7-stable.repo
