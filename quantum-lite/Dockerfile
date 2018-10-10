@@ -11,7 +11,7 @@ USER $NB_USER
 WORKDIR $GITDIR
 
 # Cirq, QISKit, QuTiP
-RUN source activate && pip install cirq==0.3.1.35 && pip install qiskit==0.5.7
+RUN source activate && pip install cirq==0.3.1.35 && pip install qiskit==0.6.1
 
 # OpenFermion
 RUN source activate && LC_ALL=en_US.UTF-8 pip install \

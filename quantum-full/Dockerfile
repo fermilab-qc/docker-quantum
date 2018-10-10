@@ -13,6 +13,9 @@ RUN source activate && pip install pyquil==1.9.0
 RUN source activate && pip install pybind11==2.2.4
 RUN LC_ALL=en_US.UTF-8 pip install projectq==0.4.1
 
+# qiskit-aqua
+RUN source activate && pip install qiskit-aqua==0.3.0
+
 RUN conda install nb_conda && conda clean -tipsy
 
 RUN conda config --add channels http://conda.anaconda.org/psi4 && conda install psi4=1.2.1+406f4de && conda clean -tipsy

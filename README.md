@@ -13,7 +13,7 @@ Just jupyterlab. You probably don't want to use this.
 Everything above, plus:
 
 * Google's [cirq](https://github.com/quantumlib/cirq)
-* IBM's [Qiskit](https://qiskit.org)
+* IBM's [Qiskit Terra](https://qiskit.org/terra)
 * [QuTiP](https://qutip.org)
 * [OpenFermion](https://github.com/quantumlib/OpenFermion)
 
@@ -23,6 +23,7 @@ Everything above, plus:
 Everything above, plus:
 
 * Rigetti's [pyquil](https://github.com/rigetticomputing/pyquil)
+* IBM's [Qiskit Aqua](https://qiskit.org/aqua)
 * ETH Zurich's [ProjectQ](https://projectq.ch)
 * Electronic structure packages:
     * [PySCF](https://github.com/sunqm/pyscf)
