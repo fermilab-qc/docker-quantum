@@ -4,7 +4,7 @@ FROM docker.io/holzman/base-notebook:${CACHE_TAG}
 USER root
 ENV GITDIR=/srv/git
 
-RUN dnf -y install git libgomp
+RUN dnf -y install git libgomp gcc
 RUN mkdir -p $GITDIR && chown $NB_UID:$NB_GID $GITDIR && ln -s /home/$NB_USER $GITDIR/work
 
 USER $NB_USER
