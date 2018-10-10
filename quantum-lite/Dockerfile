@@ -1,4 +1,5 @@
-FROM docker.io/holzman/base-notebook
+ARG CACHE_TAG=latest
+FROM docker.io/holzman/base-notebook:${CACHE_TAG}
 
 USER root
 ENV GITDIR=/srv/git

@@ -1,4 +1,5 @@
-FROM docker.io/holzman/quantum-full
+ARG CACHE_TAG=latest
+FROM docker.io/holzman/quantum-full:${CACHE_TAG}
 
 USER root
 
