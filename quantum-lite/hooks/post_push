@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TAG_NAME="dev"
+DEST_IMAGE_NAME=$(basename $PWD)
+DEST_IMAGE=docker.io/holzman/${DEST_IMAGE_NAME}:${TAG_NAME}
+
+if [ "$CACHE_TAG" == "$TAG_NAME" ]
+then
+	docker tag $IMAGE_NAME $DEST_IMAGE
+	docker push $DEST_IMAGE
+fi
