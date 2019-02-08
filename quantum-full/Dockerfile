@@ -1,5 +1,5 @@
-ARG CACHE_TAG=latest
-FROM docker.io/fermilabqc/quantum-lite:${CACHE_TAG}
+ARG DOCKER_TAG=latest
+FROM docker.io/fermilabqc/quantum-lite:${DOCKER_TAG}
 
 USER root
 RUN dnf -y install gcc gcc-c++

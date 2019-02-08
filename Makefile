@@ -6,10 +6,10 @@ branch:=$(subst master,latest,$(shell git rev-parse --abbrev-ref HEAD))
 all: base-notebook quantum-lite quantum-full quantum-full-and-qsharp
 
 base-notebook: base-notebook/Dockerfile
-	docker build --build-arg CACHE_TAG=$(branch) -t docker.io/fermilabqc/base-notebook:$(branch) base-notebook
+	docker build --build-arg DOCKER_TAG=$(branch) -t docker.io/fermilabqc/base-notebook:$(branch) base-notebook
 
 quantum-lite: base-notebook/Dockerfile quantum-lite/Dockerfile
-	docker build --build-arg CACHE_TAG=$(branch) -t docker.io/fermilabqc/quantum-lite:$(branch) quantum-lite
+	docker build --build-arg DOCKER_TAG=$(branch) -t docker.io/fermilabqc/quantum-lite:$(branch) quantum-lite
 
 quantum-full: base-notebook/Dockerfile quantum-lite/Dockerfile quantum-full/Dockerfile
 	docker build -t docker.io/fermilabqc/quantum-full quantum-full

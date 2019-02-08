@@ -1,5 +1,5 @@
-ARG CACHE_TAG=latest
-FROM docker.io/fermilabqc/base-notebook:${CACHE_TAG}
+ARG DOCKER_TAG=latest
+FROM docker.io/fermilabqc/base-notebook:${DOCKER_TAG}
 
 USER root
 ENV GITDIR=/srv/git

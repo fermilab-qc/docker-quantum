@@ -1,5 +1,5 @@
-ARG CACHE_TAG=latest
-FROM docker.io/fermilabqc/quantum-full:${CACHE_TAG}
+ARG DOCKER_TAG=latest
+FROM docker.io/fermilabqc/quantum-full:${DOCKER_TAG}
 
 USER root
 
