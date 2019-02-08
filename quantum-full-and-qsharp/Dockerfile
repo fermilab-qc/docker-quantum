@@ -1,5 +1,5 @@
 ARG CACHE_TAG=latest
-FROM docker.io/holzman/quantum-full:${CACHE_TAG}
+FROM docker.io/fermilabqc/quantum-full:${CACHE_TAG}
 
 USER root
 
@@ -42,7 +42,7 @@ ENV PYTHONPATH=$PYTHONPATH:$GITDIR/Quantum/Interoperability/python
 
 ####
 
-FROM docker.io/holzman/base-notebook
+FROM docker.io/fermilabqc/base-notebook
 USER root
 
 ENV GITDIR /srv/git
