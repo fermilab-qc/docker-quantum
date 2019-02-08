@@ -4,11 +4,11 @@ The docker-quantum repository provides several different containers with various
 quantum computing simulation frameworks. They all contain jupyterlab and can be used
 with a jupyterhub installation.
 
-### holzman/base-notebook
+### fermilabqc/base-notebook
 
 Just jupyterlab. You probably don't want to use this.
 
-### holzman/quantum-lite
+### fermilabqc/quantum-lite
 
 Everything above, plus:
 
@@ -18,7 +18,7 @@ Everything above, plus:
 * [OpenFermion](https://github.com/quantumlib/OpenFermion)
 
 
-### holzman/quantum-full
+### fermilabqc/quantum-full
 
 Everything above, plus:
 
@@ -29,14 +29,14 @@ Everything above, plus:
     * [PySCF](https://github.com/sunqm/pyscf)
 	* [Psi4](https://www.psicode.org)
 
-### holzman/quantum-full-and-qsharp
+### fermilabqc/quantum-full-and-qsharp
 
 Everything above, plus Microsoft's [Q#](https://docs.microsoft.com/en-us/quantum/). This image is twice as large as quantum-full.
 
 ## Quickstart (without Jupyterhub)
 
 ```
-docker run -t 127.0.0.1:8888:8888 --name quantum -d holzman/quantum-full
+docker run -t 127.0.0.1:8888:8888 --name quantum -d fermilabqc/quantum-full
 docker logs quantum
 ```
 
