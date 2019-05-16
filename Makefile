@@ -12,7 +12,7 @@ quantum-lite: base-notebook/Dockerfile quantum-lite/Dockerfile
 	docker build --build-arg DOCKER_TAG=$(branch) -t docker.io/fermilabqc/quantum-lite:$(branch) quantum-lite
 
 quantum-full: base-notebook/Dockerfile quantum-lite/Dockerfile quantum-full/Dockerfile
-	docker build -t docker.io/fermilabqc/quantum-full quantum-full
+	docker build --build-arg DOCKER_TAG=$(branch) -t docker.io/fermilabqc/quantum-full:$(branch) quantum-full
 
 quantum-full-and-qsharp: base-notebook/Dockerfile quantum-lite/Dockerfile quantum-full/Dockerfile quantum-full-and-qsharp/Dockerfile
 	docker build -t docker.io/fermilabqc/quantum-full-and-qsharp quantum-full-and-qsharp
