@@ -7,14 +7,14 @@ RUN dnf -y install gcc gcc-c++
 USER $NB_USER
 
 # PyQuil - Rigetti
-RUN source activate && pip install pyquil==1.9.0
+RUN source activate && pip install pyquil==2.7.2
 
 # ProjectQ
 RUN source activate && pip install pybind11==2.2.4
-RUN LC_ALL=en_US.UTF-8 pip install projectq==0.4.1
+RUN LC_ALL=en_US.UTF-8 pip install projectq==0.4.2
 
 # qiskit-aqua
-RUN source activate && pip install qiskit-aqua==0.3.0
+RUN source activate && pip install qiskit-aqua==0.5.0
 
 RUN conda install nb_conda && conda clean -tipsy
 
