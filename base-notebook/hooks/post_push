@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/bin/bash -vx
+
+printenv | sort
+echo '================'
 
 TAG_NAME="dev"
 DEST_IMAGE_NAME=$(basename $PWD)
