@@ -7,7 +7,7 @@ RUN dnf -y install gcc gcc-c++
 USER $NB_USER
 
 # PyQuil - Rigetti
-RUN source activate && pip install pyquil==2.7.2
+RUN source activate && pip install pyquil==2.11
 
 # ProjectQ
 RUN source activate && pip install pybind11==2.2.4
