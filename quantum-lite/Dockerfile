@@ -11,7 +11,7 @@ USER $NB_USER
 WORKDIR $GITDIR
 
 # Cirq, QISKit, QuTiP
-RUN source activate && pip install cirq==0.4.0 && pip install qiskit==0.10.1
+RUN source activate && pip install cirq==0.4.0 && pip install qiskit==0.13.0
 
 # OpenFermion
 RUN source activate && LC_ALL=en_US.UTF-8 pip install openfermion openfermioncirq
@@ -21,4 +21,4 @@ RUN chown -R $NB_UID:$NB_GID $CONDA_DIR/lib/python3.6/site-packages/openfermion/
 RUN git clone https://github.com/quantumlib/OpenFermion && git clone https://github.com/kevinsung/OpenFermion-Hands-On-Tutorials
 
 # QuTiP
-RUN conda install qutip==4.3.1 && conda clean -tipsy
+RUN conda install qutip==4.4.1 && conda clean -tipsy
