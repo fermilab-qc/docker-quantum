@@ -36,7 +36,7 @@ Everything above, plus Microsoft's [Q#](https://docs.microsoft.com/en-us/quantum
 ## Quickstart (without Jupyterhub)
 
 ```
-docker run -t 127.0.0.1:8888:8888 --name quantum -d fermilabqc/quantum-full
+docker run -p 127.0.0.1:8888:8888 --name quantum -d fermilabqc/quantum-full
 docker logs quantum
 ```
 
